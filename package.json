@@ -1,0 +1,30 @@
+{
+  "name": "noticeboard-server",
+  "version": "1.0.0",
+  "description": "server for noticeboard",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node server.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/shriram98/noticeboard-server.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/shriram98/noticeboard-server/issues"
+  },
+  "homepage": "https://github.com/shriram98/noticeboard-server#readme",
+  "dependencies": {
+    "cookie-parser": "^1.4.3",
+    "cookie-session": "^2.0.0-beta.3",
+    "express": "^4.16.4",
+    "morgan": "^1.9.1",
+    "mysql": "^2.16.0",
+    "passport": "^0.4.0",
+    "passport-google-oauth": "^1.0.0",
+    "path": "^0.12.7"
+  }
+}
