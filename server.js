@@ -64,23 +64,33 @@ app.get('/auth/google/callback',
     }
 );
 
-//create table event_details(details_id INT NOT NULL PRIMARY KEY, evt_desc VARCHAR(500), evt_price INT, evt_venue VARCHAR(50), evt_contact VARCHAR(40));
-//create table event(evt_id INT PRIMARY KEY NOT NULL AUTO_INCREMENT=1000, evt_name VARCHAR(20), evt_date DATE, evt_details_id INT, evt_cat_id INT);
-
 // define queries to use
 var queries = {
     getEvent: 'SELECT * FROM event WHERE evt_name = ?',
     getEventDetails: 'SELECT * FROM event_details WHERE details_id = ?',
     addEvent: 'INSERT INTO event VALUES(?, ?, ?, ?)',
     addEventDetails: 'INSERT INTO event_details VALUES(?, ?, ?, ?, ?)',
+    getCategory: 'SELECT cat_id FROM category WHERE cat_name = ?',
+    getElementOfCategory: 'SELECT * FROM event WHERE evt_cat_id = ?',
 }
 
 // To get Event Details based on category
-app.get('/getevent/:eventName', function(req,res) {
-    console.log("working");
+app.get('/getevent', function(req,res) {
+    res.send('Hello World');
 });
 
-app.get('/')
+app.get('/category/:catName', function(req, res) {
+    var cat_id;
+    connection.query(queries.getCategory, req.params.catName, function(err, rows, fields) {
+        if(err) throw err;
+        connection.query(queries.getElementOfCategory, rows[0].cat_id, function(err, rows, fields) {
+            if(err) throw err;
+            console.log(rows);
+            res.send(rows)
+        })
+    });
+})
+
 
 app.listen(8080, () => {
     console.log('Server is running on port 8080');
